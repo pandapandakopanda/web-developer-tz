@@ -1,0 +1,19 @@
+.default, .number {
+  margin: 0;
+  padding: 0;
+}
+
+.default {
+  display: flex;
+  width: 100px;
+  height: 100px;
+  font-size: larger;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  resize: none;
+}
+
+
+.isDisabled {
+  cursor: not-allowed;
+}

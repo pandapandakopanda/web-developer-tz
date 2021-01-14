@@ -1,0 +1,20 @@
+.wrapper {
+  display: flex;
+  min-width: 500px;
+  width: 80%;
+  border-radius: 4px;
+}
+
+.button-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.task-block {
+  display: flex;
+  margin-left: 10px;
+  flex-wrap: wrap;
+  min-width: 450px;
+  width: 80%;
+}

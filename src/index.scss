@@ -1,0 +1,11 @@
+html, body, .wrraper {
+  margin: 0;
+  max-height: 100vh;
+}
+
+.wrraper {
+  display: flex;
+  padding: 0;
+  flex: 1;
+  flex-direction: column;
+}

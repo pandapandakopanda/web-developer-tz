@@ -1,0 +1,97 @@
+.button {
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 20px;
+  border-radius: 2px;
+  background-color: rgb(87, 87, 105);
+  color: whitesmoke;
+  cursor: pointer;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: smaller;
+  margin: 5px;
+  user-select: none;
+}
+.name {
+  position: absolute;
+}
+
+.primary {
+  background-color: rgb(221, 57, 85);
+  transition: all 0.3s;
+  &:hover {
+    background-color: rgb(34, 7, 12);
+  }
+}
+
+.secondary {
+  background-color:rgb(34, 7, 12);
+  transition: all 0.3s; 
+  &:hover {
+    background-color: rgb(221, 57, 85);
+  }
+}
+
+.animated {
+  background-image:url('../images/cloud.jpg');
+  background-size: cover;
+  transition: background-color 1s;
+  &:hover{
+    .show{
+      margin-left: -180px;
+    }
+
+
+  }
+}
+
+.show{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 20px;
+  border-radius: 2px;
+  background-image: url('../images/star-back.jpg');
+  background-size: cover; 
+  transition: all 0.5s;
+}
+
+
+.disable{
+  background-color: lightgray;
+    cursor: not-allowed;
+}
+
+.up, .down {
+  width: 30px;
+  height: 20px;
+  font-size: 10px;
+  border: 1px solid ;
+  border-color: rgb(223, 223, 223);
+  margin: 0;
+  background: white;
+  color: rgb(223, 223, 223);
+  transition: border-color 0.3s;
+  user-select: none;
+  &:hover {
+    border-color:rgb(223, 147, 147);
+    color:rgb(223, 147, 147);
+  }
+  &:active{
+    animation: text-animation 0.2s ease-in ;
+  }
+}
+
+
+@keyframes text-animation {
+  0% {font-size: 10px;}
+  25% {font-size: 15px;}
+  50%{font-size: 20px;}
+  75% {font-size: 15px;}
+  100% {font-size: 10px;}
+}
