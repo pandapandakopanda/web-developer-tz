@@ -9,15 +9,14 @@ class Input extends Component {
 
   onChange = (ev) => {
     const {value} = ev.target
-    this.props.store.text = value
+    this.props.store.setText(value)
   }
 
 
   render() {
     const {
-      value, placeholder, max, min, isDisabled,
+      placeholder, max, min, isDisabled, value
     } = this.props
-
 
 
     const className = calcClass({

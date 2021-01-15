@@ -9,20 +9,42 @@ import Task from '../Task'
 @inject('store')
 class WorkField extends React.Component{
 
+  state={
+    taskList: null
+  }
+
   onClickHandler = () => {
     this.props.store.createNewTask()
     this.props.store.addItemToList()
+    this.props.store.clear()
+    this.setState({taskList: this.props.store.taskList})
   }
 
+
   createTaskList = (list) => {
-    console.log('list: ', list);
+    if(list == null) return <div></div>
     return Object.keys(list).map(item => {
+
+      const onXClickHandler = () => {
+        this.props.store.deleteItem(list[item].id)
+        this.setState({taskList: this.props.store.taskList})
+      }
+
+      const onDoneClick = () => {
+        this.props.store.changeItemStatus(list[item].id)
+        this.setState({taskList: this.props.store.taskList})
+      }
+
       return (
         <Task 
+          draggable
           id={list[item].id} 
           text={list[item].text} 
           date={list[item].date} 
           key={list[item].id}
+          isDone={list[item].isDone}
+          onXClickHandler={onXClickHandler}
+          onDoneClickHandler={onDoneClick}
         />
       )
     })

@@ -14,6 +14,11 @@ class Store{
     if (this.taskList === null) this.createTaskList({})
   }
 
+  @action refreshStorage = (data) =>{
+    localStorage.setItem('tasklist', JSON.stringify(data))
+    this.getTaskList()
+  }
+
   @action getTaskList = () => {
     this.taskList = JSON.parse(localStorage.getItem('tasklist')) 
     return this.taskList
@@ -21,21 +26,46 @@ class Store{
 
   @action createTaskList = (list) => {
     console.log( 'создаю объект');
-    localStorage.setItem('tasklist', JSON.stringify(list))
-    this.getTaskList()
+    this.refreshStorage(list)
+    
   }
 
   @action createNewTask = () => {
     const {text} = this
     const id = getId()
     const date = getDate(new Date)
-    this.task = {text, date, id}
+    this.task = {text, date, id,isDone:false}
+  }
+
+  @action getItem = (id) => this.taskList[id]
+  
+
+  @action changeItemStatus = (id) => {
+    const item = this.getItem(id)
+    console.log('item: ', item);
+    item.isDone=!item.isDone
+    this.taskList[id] = item
+    this.refreshStorage(this.taskList)
   }
 
   @action addItemToList = () => {
-    this.getTaskList()
     this.taskList[this.task.id] = this.task
-    localStorage.setItem('tasklist', JSON.stringify(this.taskList))
+    this.refreshStorage(this.taskList)
+  }
+
+  @action deleteItem = (id) => {
+    this.getTaskList()
+    delete this.taskList[id]
+    this.refreshStorage(this.taskList)
+  }
+
+  @action clear = () => {
+    console.log('clear!');
+    this.text=''
+  }
+
+  @action setText = (text) => {
+    this.text = text
   }
 }
 
