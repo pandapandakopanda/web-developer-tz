@@ -7,11 +7,6 @@ import WorkField from './WorkField'
 @inject('store')
 @observer
 class App extends React.Component {
-
-    componentDidMount(){
-        this.props.store.initTaskList()
-      }
-
     render(){
         return(
             <div className={ST.wrapper}>

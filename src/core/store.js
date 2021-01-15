@@ -1,13 +1,14 @@
-
 import {observable, action} from 'mobx'
-import getId from './idGenerator'
-import getDate from './getDate'
 
 class Store{
 
   @observable taskList = null
   @observable text = ''
   @observable dragData = null
+
+  constructor(){
+    this.initTaskList()
+  }
 
   @action initTaskList = ()=>{
     this.updateTaskList()
@@ -26,9 +27,11 @@ class Store{
 
   @action createNewTask = (id, date) => {
     const {text} = this
+    if(text === '') return
     const task = {text, date, id,isDone:false}
     this.taskList[task.id] = task
     this.refreshStorage(this.taskList)
+    this.clear()
   }
 
   @action getItem = (id) => this.taskList[id]
@@ -48,7 +51,7 @@ class Store{
 
   @action setDragData = (item) => {this.dragData = item}
 
-  @action clear = () => {this.text=''}
+  @action clear = () => { this.text='' }
 
   @action setText = (text) => { this.text = text }
 

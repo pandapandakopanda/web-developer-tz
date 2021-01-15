@@ -1,11 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap');
 html, body, .wrraper {
+  font-family: 'Roboto', sans-serif;
   margin: 0;
   max-height: 100vh;
-}
-
-.wrraper {
-  display: flex;
-  padding: 0;
-  flex: 1;
-  flex-direction: column;
 }

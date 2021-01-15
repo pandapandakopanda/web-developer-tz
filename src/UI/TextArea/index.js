@@ -2,21 +2,21 @@ import React, { Component } from 'react'
 
 import ST from './index.scss'
 import { calcClass } from '../../core/help'
-import { inject } from 'mobx-react'
+import { inject, observer } from 'mobx-react'
 
 @inject('store')
-class Input extends Component {
+@observer
+class TextArea extends Component {
 
   onChange = (ev) => {
     const {value} = ev.target
-    console.log('value: ', value);
     this.props.store.setText(value)
   }
 
 
   render() {
     const {
-      placeholder, max, min, isDisabled, value
+      placeholder, max, min, isDisabled
     } = this.props
 
 
@@ -26,13 +26,13 @@ class Input extends Component {
     }, ST)
 
     const inputData = {
-       placeholder, value, className, max, min,
+       placeholder, className, max, min,
     }
 
     return (
       <textarea
         autoFocus
-        value={inputData.value}
+        value={this.props.store.text}
         className={inputData.className}
         placeholder={inputData.placeholder}
         onChange={this.onChange}
@@ -43,4 +43,4 @@ class Input extends Component {
   }
 }
 
-export default Input
+export default TextArea

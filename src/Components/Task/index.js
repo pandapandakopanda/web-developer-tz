@@ -12,11 +12,13 @@ class Task extends React.Component{
   }
 
   render(){
-    this.props.store.initTaskList()
-    const {text, date, id, 
-          onXClickHandle, onDoneClickHandle, 
+
+    const {
+          text, date, id, 
+          onDoneClickHandle, 
           onDragStartHandle,
-          isDone } = this.props
+          isDone 
+        } = this.props
 
     const classname = isDone ? ST.done : ST.task 
   
@@ -28,7 +30,6 @@ class Task extends React.Component{
         draggable
         onDragStart={(e)=>{onDragStartHandle(e)}}
       >
-        <div className={ST.close} onClick={onXClickHandle}>X</div>
         <div className={ST.text}>{text}</div>
         <div className={ST['done-button']} onClick={onDoneClickHandle}>
           {isDone ? 'UNDONE' : 'DONE!'}
