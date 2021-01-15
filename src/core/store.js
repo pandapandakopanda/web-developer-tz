@@ -24,11 +24,7 @@ class Store{
     return this.taskList
   }
 
-  @action createTaskList = (list) => {
-    console.log( 'создаю объект');
-    this.refreshStorage(list)
-    
-  }
+  @action createTaskList = (list) => {this.refreshStorage(list)}
 
   @action createNewTask = () => {
     const {text} = this
@@ -42,7 +38,6 @@ class Store{
 
   @action changeItemStatus = (id) => {
     const item = this.getItem(id)
-    console.log('item: ', item);
     item.isDone=!item.isDone
     this.taskList[id] = item
     this.refreshStorage(this.taskList)
@@ -54,19 +49,16 @@ class Store{
   }
 
   @action deleteItem = (id) => {
-    this.getTaskList()
     delete this.taskList[id]
     this.refreshStorage(this.taskList)
   }
 
-  @action clear = () => {
-    console.log('clear!');
-    this.text=''
-  }
+  @action setTask = (task) => {this.task = task}
 
-  @action setText = (text) => {
-    this.text = text
-  }
+  @action clear = () => {this.text=''}
+
+  @action setText = (text) => { this.text = text }
+
 }
 
 const store = new Store

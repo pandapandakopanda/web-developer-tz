@@ -20,6 +20,7 @@
     "body-parser": "*",
     "concurrently": "^5.3.0",
     "cors": "*",
+    "create-react-app": "^4.0.1",
     "css-loader": "^4.2.0",
     "history": "^5.0.0",
     "html-webpack-plugin": "^4.3.0",
