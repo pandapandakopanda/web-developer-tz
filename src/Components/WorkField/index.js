@@ -6,6 +6,9 @@ import Button from '../../UI/Button'
 import TextArea from '../../UI/TextArea'
 import Task from '../Task'
 
+import getDate from '../../core/getDate'
+import getId from '../../core/idGenerator'
+
 @inject('store')
 @observer
 class WorkField extends React.Component{
@@ -15,15 +18,15 @@ class WorkField extends React.Component{
   }
 
   onClickHandler = () => {
-    this.props.store.createNewTask()
-    this.props.store.addItemToList()
+    const id = getId()
+    const date = getDate(new Date)
+    this.props.store.createNewTask(id, date)
     this.props.store.clear()
-    this.setState({taskList: this.props.store.taskList})
+    // this.setState({taskList: this.props.store.taskList})
   }
 
   onDropHandle = (e) => {
-    console.log('e: ', e.target);
-    const {id} = this.props.store.task
+    const {id} = this.props.store.dragData
     this.props.store.deleteItem(id)
   }
 
@@ -31,8 +34,10 @@ class WorkField extends React.Component{
     e.preventDefault()
   }
 
-  createTaskList = (list) => {
-    if(list == null) return <div></div>
+  createTaskList() {
+    let list = this.props.store.taskList
+
+    if(list == null) return null
     return Object.keys(list).map(item => {
 
       const onXClickHandle = () => {
@@ -42,13 +47,12 @@ class WorkField extends React.Component{
 
       const onDoneClickHandle = () => {
         this.props.store.changeItemStatus(list[item].id)
-        this.setState({taskList: this.props.store.taskList})
+        // this.setState({taskList: this.props.store.taskList})
       }
 
       const onDragStartHandle = (e) => {
         e.dataTransfer.setData('id',list[item].id)
-        this.props.store.setTask(list[item])
-        console.log(this.props.store.task);
+        this.props.store.setDragData(list[item])
       }
 
       return (
@@ -67,7 +71,7 @@ class WorkField extends React.Component{
   }
 
   render(){
-    const list = this.props.store.getTaskList()
+
     return(
       <div className={ST['wrapper-column']} onDragOver={(e)=>{this.handleDragOver(e)}}>
         <div className={ST['wrapper-row']}>
@@ -78,7 +82,7 @@ class WorkField extends React.Component{
           </Button> 
         </div>
         <div className={ST['task-block']}>
-          {this.createTaskList(list)}
+          {this.createTaskList()}
         </div>
       </div>
       <div 

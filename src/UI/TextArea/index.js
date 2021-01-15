@@ -9,6 +9,7 @@ class Input extends Component {
 
   onChange = (ev) => {
     const {value} = ev.target
+    console.log('value: ', value);
     this.props.store.setText(value)
   }
 

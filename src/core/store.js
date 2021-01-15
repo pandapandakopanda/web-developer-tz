@@ -7,30 +7,28 @@ class Store{
 
   @observable taskList = null
   @observable text = ''
-  @observable task = null
+  @observable dragData = null
 
   @action initTaskList = ()=>{
-    this.getTaskList()
-    if (this.taskList === null) this.createTaskList({})
+    this.updateTaskList()
+    if (this.taskList === null) this.refreshStorage({})
   }
 
   @action refreshStorage = (data) =>{
     localStorage.setItem('tasklist', JSON.stringify(data))
-    this.getTaskList()
+    this.updateTaskList()
   }
 
-  @action getTaskList = () => {
+  @action updateTaskList = () => {
     this.taskList = JSON.parse(localStorage.getItem('tasklist')) 
     return this.taskList
   }
 
-  @action createTaskList = (list) => {this.refreshStorage(list)}
-
-  @action createNewTask = () => {
+  @action createNewTask = (id, date) => {
     const {text} = this
-    const id = getId()
-    const date = getDate(new Date)
-    this.task = {text, date, id,isDone:false}
+    const task = {text, date, id,isDone:false}
+    this.taskList[task.id] = task
+    this.refreshStorage(this.taskList)
   }
 
   @action getItem = (id) => this.taskList[id]
@@ -43,17 +41,12 @@ class Store{
     this.refreshStorage(this.taskList)
   }
 
-  @action addItemToList = () => {
-    this.taskList[this.task.id] = this.task
-    this.refreshStorage(this.taskList)
-  }
-
   @action deleteItem = (id) => {
     delete this.taskList[id]
     this.refreshStorage(this.taskList)
   }
 
-  @action setTask = (task) => {this.task = task}
+  @action setDragData = (item) => {this.dragData = item}
 
   @action clear = () => {this.text=''}
 
