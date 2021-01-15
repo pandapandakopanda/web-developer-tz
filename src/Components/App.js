@@ -1,10 +1,11 @@
-import { inject } from 'mobx-react'
+import { inject, observer } from 'mobx-react'
 import React from 'react'
 import ST from './index.scss'
 
 import WorkField from './WorkField'
 
 @inject('store')
+@observer
 class App extends React.Component {
 
     componentDidMount(){
